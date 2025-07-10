@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>User Profile</h1>
+        </header>
+        
+        <section class="profile-section">
+            <h2>Your Profile</h2>
+            <form action="/profile" method="POST" enctype="multipart/form-data">
+                <div class="profile-picture" id="profile-picture-preview" onclick="document.getElementById('profile_picture').click()">
+                    <img id="profileImage" src="../static/default.png" alt="Profile Picture" class="profile-img">
+                </div>
+                
+                <input type="file" id="profile_picture" name="profile_picture" style="display: none;" onchange="updateProfileImage()">
+                
+              
+
+        
+                <div class="form-group">
+                    <label for="dob">Date of Birth * </label>
+                    <input type="date" id="dob" name="dob" required min="1940-01-01" max="2025-12-31">
+                </div>
+        
+                <div class="form-group">
+                    <label for="gender">Gender * </label>
+                    <select id="gender" name="gender"required>
+                        <option value="" disabled selected>Select Gender</option> <!-- Default placeholder option -->
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+        
+                <div class="form-group">
+                    <label for="role">Student or Faculty * </label>
+                    <select id="role" name="role" onchange="toggleStudyingYear()"required>
+                        <option value="" disabled selected>Select Role</option> <!-- Default placeholder option -->
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty</option>
+                    </select>
+                </div>
+        
+                <div class="form-group" id="studying-year-group" style="display: none;">
+                    <label for="studying_year">Studying Year * </label>
+                    <select id="studying_year" name="studying_year"required>
+                        <option value="" disabled selected>Select Year</option> <!-- Default placeholder option -->
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                    </select>
+                </div>
+        
+                <div class="form-group">
+                    <label for="department">Department * </label>
+                    <select id="department" name="department"required>
+                        <option value="" disabled selected>Select Department</option> <!-- Default placeholder option -->
+                        <option value="computer_science">Computer Science</option>
+                        <option value="electrical_engineering">Electrical Engineering</option>
+                        <option value="mechanical_engineering">Mechanical Engineering</option>
+                        <option value="civil_engineering">Civil Engineering</option>
+                    </select>
+                </div>
+        
+                <div class="form-group">
+                    <label for="bio">Short Bio * </label>
+                    <textarea id="bio" name="bio" placeholder="Write something about yourself..." required></textarea>
+                </div>
+        
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </section>
+        
+        <script>
+            // Function to toggle visibility of the "Studying Year" field
+            function toggleStudyingYear() {
+                var role = document.getElementById("role").value;
+                var studyingYear = document.getElementById("studying_year");
+                var studyingYearGroup = document.getElementById("studying-year-group");
+
+                if (role === "student") {
+                    studyingYearGroup.style.display = "block";
+                    studyingYear.required = true;
+                } else {
+                    studyingYearGroup.style.display = "none";
+                    studyingYear.required = false;
+                }
+            }
+
+        
+            // Function to update profile picture or use default
+            function updateProfileImage() {
+                var fileInput = document.getElementById("profile_picture");
+                var profileImage = document.getElementById("profileImage");
+
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        profileImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            
+            }
+            
+            // Call the function to initialize the profile picture when the page loads
+            window.onload = function() {
+                updateProfileImage();
+                toggleStudyingYear(); // Initialize studying year visibility based on the role
+            }
+    // 🚀 Clears all previous pages and forces a reload
+    history.replaceState(null, null, location.href);
+    window.addEventListener("popstate", function () {
+        history.replaceState(null, null, location.href);
+        location.reload(); // Force reload when trying to go back
+    });
+        </script>
+    </div>
+</body>
+</html>

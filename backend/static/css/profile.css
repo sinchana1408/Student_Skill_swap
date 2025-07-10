@@ -1,0 +1,171 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    flex-direction: column;
+}
+
+.container {
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    font-family: 'K2D', Arial, Roboto, Sans-serif;
+    overflow-y: auto; /* Enables vertical scrolling if content overflows */
+    margin-top: 20px; /* Added margin-top to give space from the top */
+    display: flex;
+    flex-direction: column; /* Align the form content vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: flex-start; /* Start from top */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 28px;
+    color: #333;
+    font-weight: 600;
+}
+
+.profile-section h2 {
+    text-align: center;
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    font-family: 'K2D', Arial, Roboto, Sans-serif;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #4C6FFF;
+    outline: none;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+/* Form Button Styling */
+button {
+    width: 50%; /* Set button width to 50% */
+    padding: 12px;
+    background-color: #FFD83B; /* Yellow Button */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Adds spacing above the button */
+    display: block; /* Make sure the button behaves as a block-level element */
+    margin-left: auto; /* Centers the button */
+    margin-right: auto; /* Centers the button */
+    font-family: 'K2D', Arial, Roboto, Sans-serif;
+}
+
+button:hover {
+    background-color: #FFD83B; /* Darker yellow on hover */
+}
+
+/* Ensures button is centered */
+.form-group:last-child {
+    text-align: center; /* Centers the button container */
+}
+
+/* Profile Picture Styling */
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Makes the image round */
+    object-fit: cover;
+    border: 3px solid #FFD83B; /* Adds border around profile image */
+}
+
+.profile-img-default {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border-radius: 50%; /* Makes the default image round */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    color: #333;
+    font-weight: bold;
+    border: 3px solid #FFD83B; /* Border for default profile image */
+}
+
+.profile-picture {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin-top: 10px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .profile-section h2 {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .profile-img, .profile-img-default {
+        width: 80px;
+        height: 80px;
+    }
+}

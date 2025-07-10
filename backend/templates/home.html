@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student_Skill_Swap-HOME</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <ul>
+        <li><a href="{{ url_for('home') }}">🏠 Home</a></li>
+        <li><a href="/study-materials">📚 Study Material</a></li>
+    </ul>
+            <!-- User Profile with Dropdown -->
+    <div class="nav-right">
+        <div class="profile-dropdown">
+            <img id="userProfilePic" src="{{ user.profile_picture or '/static/default.png' }}"  onclick="toggleDropdown()">
+            <span onclick="toggleDropdown()">{{ user.name }}</span>
+
+            <!-- Dropdown Menu with User Details -->
+            <div id="dropdownMenu" class="dropdown-content">
+                <div class="dropdown-header">
+                    <img src="{{ user.profile_picture or '/static/default.png' }}" >
+                    <h3>{{ user.get('name', 'Unknown') }}</h3>
+                    <p>{{ user.get('email', 'No Email') }}</p>
+                </div>
+                <hr>
+                <p><strong>Department:</strong> {{ user.get('department', 'N/A') }}</p>
+                <p><strong>Role:</strong> {{ user.get('role', 'N/A') }}</p>
+                {% if user.get('role') == 'student' %}
+                    <p><strong>Year:</strong> {{ user.get('studying_year', 'N/A') }}</p>
+                {% endif %}
+                <p><strong>Gender:</strong> {{ user.get('gender', 'N/A') }}</p>
+                <p><strong>Bio:</strong> {{ user.get('bio', 'N/A') }}</p>
+                <hr>
+                <a href="{{ url_for('logout') }}" class="logout-btn">🚪 Logout</a>
+            </div>
+        </div>
+    </div>
+    </nav>
+</nav>
+
+<div class="container">
+    <!-- Left Sidebar (Dynamic User Details) -->
+<!-- Left Sidebar (Dynamic User Details) -->
+<div class="sidebar left" id="user-profile">
+    <img id="profilePic" src="/static/default.png">
+    <h2 id="profileName">Select a user</h2>
+    <p><strong>Email:</strong> <span id="profileEmail">-</span></p>
+    <p><strong>Department:</strong> <span id="profileDepartment">-</span></p>
+    <p><strong>Role:</strong> <span id="profileRole">-</span></p>
+    <p id="profileYearContainer" style="display:none;"><strong>Year:</strong> <span id="profileYear">-</span></p>
+    <p><strong>Gender:</strong> <span id="profileGender">-</span></p>
+    <p><strong>Bio:</strong> <span id="profileBio">-</span></p>
+</div>
+
+
+ <!-- Middle Section (Chat Window) -->
+    <!-- Chat Section -->
+<div class="chat-container">
+    <!-- Chat Top Bar (Shows Profile & Name) -->
+    <div class="chat-top-bar" id="chatTopBar">
+        <span id="backIcon" class="back-icon" onclick="exitChat()">
+            <i class="fas fa-arrow-left"></i>
+        </span>        
+        <img id="chatUserPic" src="/static/default.png">
+        <span id="chatUserName">Select a user to chat</span>
+    </div>
+
+    <!-- Chat Messages -->
+    <div id="chat-box">
+ 
+    <input type="hidden" id="receiver-email" value="{{ receiver_email }}">
+
+   
+    </div>
+     <!-- Scroll Down Button (Initially Hidden) -->
+    <button id="scroll-down-btn" class="scroll-down-btn">⬇</button>
+    <!-- Chat Input Section with File Upload -->
+    <div id="chatInputContainer" style="display: none;">
+        <div class="chat-input">
+            <label for="fileInput" class="file-icon"><i class="fas fa-paperclip"></i></label>
+            <input type="file" id="fileInput" style="display: none;" onchange="previewFile()"> 
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button id="sendBtn">➤</button>
+        </div>
+    </div>
+    
+</div>
+
+    <!-- Right Sidebar (Users List) -->
+    <div class="sidebar right" id="user-list">
+        <h3>Users</h3>
+            <!-- Toggle Switch for Faculty & Students -->
+        <div class="toggle-buttons">
+        <button id="facultyBtn" class="active" onclick="switchRole('faculty')">👨‍🏫 Faculties</button>
+        <button id="studentBtn" onclick="switchRole('student')">🎓 Students</button>
+        </div>
+        <!-- Search Bar for Users -->
+        <input type="text" id="searchUser" placeholder="🔍 Search user..." onkeyup="filterUsers()">
+        <p></p>
+        <ul id="users">
+        </ul>        
+    </div>
+</div>
+
+<script>
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+var selectedUser = null;
+let selectedRole = "faculty"; // Default role filter
+
+document.getElementById("sendBtn").addEventListener("click", sendMessage);
+document.getElementById("facultyBtn").addEventListener("click", () => switchRole("faculty"));
+document.getElementById("studentBtn").addEventListener("click", () => switchRole("student"));
+document.getElementById("searchUser").addEventListener("input", filterUsers);
+document.addEventListener("click", closeDropdown);
+
+loadUsers();
+
+if (!window.socket) {  // Prevent multiple socket connections
+    window.socket = io.connect('http://localhost:5000');
+}
+
+function loadUsers() {
+    fetch('/users')
+        .then(response => response.json())
+        .then(data => {
+            let userList = document.getElementById("users");
+            userList.innerHTML = "";
+
+            data.forEach(user => {
+                if (user.role === selectedRole) {
+                    let li = document.createElement("li");
+                    let profilePic = user.profile_picture || "/static/default.png";
+                    li.innerHTML = `<img src="${profilePic}" width="30"> ${user.name}`;
+                    li.onclick = () => selectUser(user.email);
+                    userList.appendChild(li);
+                }
+            });
+        });
+}
+
+function selectUser(email) {
+    selectedUser = email;
+    document.getElementById("chat-box").innerHTML = "";
+
+    let currentUser = "{{ user.email }}";
+    socket.emit('join_room', currentUser);
+    socket.emit('join_room', selectedUser);
+
+    fetch('/users')
+        .then(response => response.json())
+        .then(data => {
+            let user = data.find(u => u.email === email);
+            if (user) updateUserSidebar(user);
+        });
+
+    fetchMessages(); // ✅ Call fetchMessages initially
+
+    // ✅ Refresh chat messages every second
+    if (window.chatRefreshInterval) clearInterval(window.chatRefreshInterval);
+    window.chatRefreshInterval = setInterval(fetchMessages, 1000);
+}
+
+// ✅ Function to fetch messages (Same logic as before)
+function fetchMessages() {
+    if (!selectedUser) return;
+
+    fetch(`/messages/${selectedUser}`)
+        .then(response => response.json())
+        .then(data => {
+            let chatBox = document.getElementById("chat-box");
+
+            let existingMessages = new Set([...chatBox.children].map(div => div.id));
+
+            data.forEach(msg => {
+                let messageId = `msg-${msg.timestamp}-${msg.sender}`;
+                if (!existingMessages.has(messageId)) {
+                    appendMessage(msg, msg.is_sender);
+                    existingMessages.add(messageId);
+                }
+            });
+
+            
+        });
+}
+
+
+function updateUserSidebar(user) {
+    document.getElementById("profilePic").src = user.profile_picture || "/static/default.png";
+    document.getElementById("profileName").innerText = user.name;
+    document.getElementById("profileEmail").innerText = user.email;
+    document.getElementById("profileDepartment").innerText = user.department;
+    document.getElementById("profileRole").innerText = user.role;
+    document.getElementById("profileYearContainer").style.display = user.role === "student" ? "block" : "none";
+    document.getElementById("profileYear").innerText = user.studying_year || "N/A";
+    document.getElementById("profileGender").innerText = user.gender;
+    document.getElementById("profileBio").innerText = user.bio || "-";
+
+    document.getElementById("chatUserPic").src = user.profile_picture || "/static/default.png";
+    document.getElementById("chatUserName").innerText = user.name;
+    document.getElementById("backIcon").style.display = "inline";
+    document.getElementById("chatInputContainer").style.display = "block";
+}
+
+function sendMessage() {
+    let messageInput = document.getElementById("messageInput");
+    let fileInput = document.getElementById("fileInput");
+    let message = messageInput.value.trim();
+    let file = fileInput.files[0];
+
+    if (!message && !file) {
+        alert("Cannot send an empty message!");
+        return;
+    }
+
+    let formData = new FormData();
+    formData.append("receiver", selectedUser);
+    if (message) {
+        formData.append("message", message);
+    }
+    if (file) {
+        formData.append("file", file);
+    }
+
+    fetch("/upload_message", { 
+        method: "POST", 
+        body: formData 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // ✅ Prevent sender from appending duplicate message
+            fetchMessages();
+            
+            // ✅ Clear input fields
+            messageInput.value = "";
+            fileInput.value = "";
+            fileInput.type = "";
+            fileInput.type = "file";
+        } else {
+            alert("Error sending message.");
+        }
+    })
+    .catch(error => console.error("❌ Send Error:", error));
+}
+
+
+socket.on('receive_message', function (data) {
+    let messageId = `msg-${data.timestamp}-${data.file_url || data.message}`;
+    
+    // ✅ Prevent duplicate message insertion
+    if (!document.getElementById(messageId)) {
+        appendMessage(data, data.sender === "{{ user.email }}");
+    }
+});
+
+
+
+function filterUsers() {
+    let searchInput = document.getElementById("searchUser").value.toLowerCase();
+    let users = document.querySelectorAll("#users li");
+
+    users.forEach(user => {
+        let userName = user.textContent.toLowerCase();
+        user.style.display = userName.includes(searchInput) ? "block" : "none";
+    });
+}
+
+let isUserScrolling = false; // Track if the user is manually scrolling
+let chatBox = document.getElementById("chat-box");
+let scrollDownBtn = document.getElementById("scroll-down-btn"); // ✅ Scroll button
+
+// ✅ Detect scrolling event to update `isUserScrolling`
+chatBox.addEventListener("scroll", function () {
+    let isAtBottom = chatBox.scrollTop + chatBox.clientHeight >= chatBox.scrollHeight - 10;
+
+    if (isAtBottom) {
+        isUserScrolling = false;
+        scrollDownBtn.style.display = "none"; // ✅ Hide button when at bottom
+    } else {
+        isUserScrolling = true;
+        scrollDownBtn.style.display = "block"; // ✅ Show button when user scrolls up
+    }
+});
+
+// ✅ Scroll Down Button Click Event
+scrollDownBtn.addEventListener("click", function () {
+    chatBox.scrollTop = chatBox.scrollHeight; // ✅ Scroll to bottom
+});
+
+function appendMessage(data, isSender) {
+    console.log("Received Data:", data); // ✅ Debugging: Check API response
+
+    let chatBox = document.getElementById("chat-box");
+    let messageId = `msg-${data.timestamp}-${data.file_url || data.message}`;
+
+    // ✅ Prevent duplicate messages
+    if (document.getElementById(messageId)) return;
+
+    let div = document.createElement("div");
+    div.className = isSender ? "sent" : "received";
+    div.id = messageId;
+
+    let formattedTimestamp = formatTimestamp(data.timestamp);
+    let timestampText = `<span class="timestamp">${formattedTimestamp}</span>`;
+
+    if (data.file_url) {
+        let fileType = data.file_url.split('.').pop().toLowerCase();
+        let fileName = data.file_url.split('/').pop();
+        let downloadButton = `<a href="${data.file_url}" download class="download-btn">⬇️ Download</a>`;
+
+        if (["png", "jpg", "jpeg", "gif", "webp"].includes(fileType)) {
+            div.innerHTML = `<img src="${data.file_url}" class="chat-media">${timestampText}${downloadButton}`;
+        } else if (["mp4", "webm", "mov"].includes(fileType)) {
+            // ✅ Check if video already exists, don't reload it
+            let existingVideo = document.querySelector(`video[data-file="${data.file_url}"]`);
+
+            if (!existingVideo) {
+                div.innerHTML = `
+                    <video controls class="chat-media" data-file="${data.file_url}">
+                        <source src="${data.file_url}" type="video/${fileType}">
+                    </video>
+                    ${timestampText}${downloadButton}
+                `;
+            } else {
+                div.appendChild(existingVideo); // ✅ Reuse existing video
+                div.innerHTML += `${timestampText}${downloadButton}`;
+            }
+        } else {
+            div.innerHTML = `
+
+                <div class="file-name">${fileName}</div>
+                ${downloadButton}
+                ${timestampText}`
+        }
+    } else {
+        div.innerHTML = `${data.message} ${timestampText}`;
+    }
+
+    let wasAtBottom = chatBox.scrollTop + chatBox.clientHeight >= chatBox.scrollHeight - 10;
+
+    chatBox.appendChild(div);
+
+    if (!isUserScrolling && wasAtBottom) {
+        chatBox.scrollTop = chatBox.scrollHeight; // ✅ Auto-scroll only if user is at bottom
+    }
+}
+
+// Function to format timestamp correctly
+function formatTimestamp(timestamp) {
+    let dateObj = new Date(timestamp);
+    
+    if (isNaN(dateObj.getTime())) {
+        return timestamp; // Return raw timestamp if parsing fails
+    }
+
+    let options = { 
+        day: "2-digit", month: "short", year: "numeric", 
+        hour: "2-digit", minute: "2-digit", hour12: true 
+    };
+    
+    return dateObj.toLocaleString("en-US", options).replace(",", ""); // Example: "24-Mar-2025 07:52 AM"
+}
+
+
+socket.on('refresh_chat', function (data) {
+    if (data.receiver === selectedUser || data.sender === selectedUser) {
+        fetchMessages(); // ✅ Just refresh chat instead of appending duplicate messages
+    }
+});
+
+
+
+function switchRole(role) {
+    selectedRole = role;
+    document.getElementById("facultyBtn").classList.toggle("active", role === "faculty");
+    document.getElementById("studentBtn").classList.toggle("active", role === "student");
+
+    let toggleContainer = document.querySelector(".toggle-buttons");
+    toggleContainer.classList.remove("faculty", "student");
+    toggleContainer.classList.add(role);
+
+    loadUsers();
+}
+
+function toggleDropdown() {
+    document.querySelector(".profile-dropdown").classList.toggle("active");
+}
+
+function closeDropdown(event) {
+    let dropdown = document.querySelector(".profile-dropdown");
+    if (!dropdown.contains(event.target)) dropdown.classList.remove("active");
+}
+
+function exitChat() {
+    selectedUser = null; // Clear selected user
+    document.getElementById("chat-box").innerHTML = ""; // Clear chat messages
+    document.getElementById("chatUserPic").src = "/static/default.png"; // Reset profile picture
+    document.getElementById("chatUserName").innerText = "Select a user to chat"; // Reset name
+
+    // Hide the back button when no user is selected
+    document.getElementById("backIcon").style.display = "none";
+    // Hide chat input when exiting chat
+    document.getElementById("chatInputContainer").style.display = "none";
+
+    // ✅ Reset Left Profile Section
+    document.getElementById("profilePic").src = "/static/default.png";
+    document.getElementById("profileName").innerText = "Select a user";
+    document.getElementById("profileEmail").innerText = "-";
+    document.getElementById("profileDepartment").innerText = "-";
+    document.getElementById("profileRole").innerText = "-";
+    document.getElementById("profileYear").innerText = "-";
+    document.getElementById("profileGender").innerText = "-";
+    document.getElementById("profileBio").innerText = "-";
+}
+    document.addEventListener("DOMContentLoaded", function () {
+        // ✅ Reload login page ONCE when the user lands on it
+        if (!sessionStorage.getItem("loginReloaded")) {
+            sessionStorage.setItem("loginReloaded", "true");
+            location.reload();
+        }
+
+        // ✅ Ensure back navigation is blocked
+        window.history.pushState(null, null, window.location.href);
+        window.history.replaceState(null, null, window.location.href);
+        window.addEventListener("popstate", function () {
+            history.go(1);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // ✅ Reload index page once when user lands on it
+        if (!sessionStorage.getItem("indexReloaded")) {
+            sessionStorage.setItem("indexReloaded", "true");
+            location.reload();
+        }
+
+        // ✅ Prevent back navigation to index after login
+        window.history.pushState(null, null, window.location.href);
+        window.history.replaceState(null, null, window.location.href);
+        window.addEventListener("popstate", function () {
+            history.go(1);
+        });
+    });
+    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+body {
+    font-family: 'K2D', Arial, Roboto, Sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    background-color: #007bff;
+    padding: 20px 40px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 5px 0;
+}
+
+form input, form select, form textarea {
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Upload & Search Bar Container */
+/* Upload & Search Bar Container */
+.upload-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Upload Section - Reduce to 30% */
+.upload-section {
+    flex: 0.3; /* 30% width */
+    text-align: left;
+}
+
+/* Search Bar - Increase to 70% */
+.search-bar {
+    flex: 0.7; /* 70% width */
+    text-align: right;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 80%; /* Increase input width */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+/* Study Materials Grid - Full Page */
+.materials-container {
+    width: 100vw; /* Full page width */
+    height: 100vh; /* Full page height */
+    overflow-y: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+/* Study Material Cards - 4 per row */
+.material-card {
+    width: calc(25% - 20px); /* 4 cards per row */
+    min-width: 200px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Ensure Filename Stays Inside the Box */
+.material-card p {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Buttons Layout */
+.material-card div {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.pdf-thumbnail {
+    width: 100%;
+    height: 200px; /* Adjust thumbnail size */
+    object-fit: cover;
+    border-radius: 5px;
+}

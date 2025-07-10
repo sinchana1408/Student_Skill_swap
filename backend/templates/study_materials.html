@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials</title>
+    <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/study_materials.css">
+</head>
+<body>
+    <nav>
+    <ul>
+        <li><a href="/home">🏠 Home</a></li>
+        <li><a href="/study-materials">📚 Study Material</a></li>
+    </ul>
+    </nav>
+<!-- Upload and Search Bar in One Row -->
+<div class="upload-search-container">
+    <!-- Upload Section (Smaller) -->
+    <div class="upload-section">
+        <h4>Upload</h4>
+        <form action="/study-materials" method="POST" enctype="multipart/form-data" class="mb-4">
+            <input type="file" name="file" class="form-control mb-2">
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+     
+
+    <!-- Search Bar (Larger) -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="🔍 Search materials..." onkeyup="filterMaterials()">
+    </div>
+</div>
+
+<!-- Study Materials Section - Full Width Below Upload & Search -->
+<h4 class="mt-4">Available Study Materials:</h4>
+<div class="materials-container">
+    {% for material in materials %}
+        <div class="material-card">
+            <img src="{{ url_for('static', filename='uploads/' + material.thumbnail) }}" 
+                 alt="PDF Preview" class="pdf-thumbnail">
+            <p><strong>{{ material.filename }}</strong></p>
+            <p>Uploaded by: <strong>{{ material.uploaded_by }}</strong></p>
+            <p><strong>Uploaded on:</strong> {{ material.upload_date }}</p>
+            <div>
+                <a href="{{ url_for('download_file', filename=material.filename) }}" class="btn btn-success btn-sm">Download</a>
+            
+                {% if material.uploaded_by == user_name %}  <!-- Only show delete button to uploader -->
+                    <form action="{{ url_for('delete_file', filename=material.filename) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                {% else %}
+                    <button class="btn btn-danger btn-sm" disabled>Delete</button>  <!-- Disabled for non-uploaders -->
+                {% endif %}
+            </div>
+            
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    function filterMaterials() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let cards = document.querySelectorAll(".material-card");
+    
+        cards.forEach(card => {
+            let fileName = card.querySelector("p").textContent.toLowerCase();
+            if (fileName.includes(input)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+    </script>
+    
+</body>
+</html>

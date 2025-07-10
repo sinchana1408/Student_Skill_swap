@@ -1,0 +1,13 @@
+go to terminal 
+
+- To Activate Environment Variable
+venv\Scripts\Activate.ps1   
+
+python backend/app.py
+
+- Click on localhost link
+
+if any error occur
+use this - PowerShell -ExecutionPolicy Bypass
+
+make sure the mongo DB Compass will run on backround

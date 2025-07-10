@@ -1,0 +1,496 @@
+/* General Styles */
+body {
+    font-family: 'K2D', Arial, Roboto, Sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+}
+
+nav {
+    background-color: #007bff;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+/* Right Side (Profile Picture & Name) */
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-right img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-right: 10px;
+}
+/* Right Side (Profile & Dropdown) */
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Profile Dropdown Container */
+.profile-dropdown {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Profile Picture */
+.profile-dropdown img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-right: 10px;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+    padding: 15px;
+    z-index: 100;
+}
+
+/* Show Dropdown */
+.profile-dropdown.active .dropdown-content {
+    display: block;
+}
+
+/* Dropdown Header (User Info) */
+.dropdown-header {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.dropdown-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    margin-bottom: 5px;
+}
+
+.dropdown-header h3 {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.dropdown-header p {
+    margin: 0;
+    font-size: 14px;
+    color: gray;
+}
+
+/* User Info Details */
+.dropdown-content p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Logout Button */
+.logout-btn {
+    display: block;
+    background: #ff4d4d;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.logout-btn:hover {
+    background: #cc0000;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: white;
+    color: black;  /* Ensure text is visible */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+    padding: 15px;
+    z-index: 100;
+}
+
+/* Show Dropdown */
+.profile-dropdown.active .dropdown-content {
+    display: block;
+}
+
+/* Ensure text is visible */
+.dropdown-content p, .dropdown-content h3 {
+    color: black;
+    font-size: 14px;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    height: 90vh;
+    margin: 10px;
+}
+
+/* Left Sidebar (User Profile) */
+.sidebar.left {
+    width: 20%;
+    background: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.sidebar.left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    border: 2px solid #007bff;
+}
+
+.sidebar.left h2 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.sidebar.left p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Middle Section (Chat) */
+.chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+#chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;  /* Stack messages vertically */
+}
+/* Chat Messages */
+.sent, .received {
+    display: block; /* Ensure messages stack on top of each other */
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 60%;
+    margin: 5px;
+    word-wrap: break-word; /* Ensure long messages wrap properly */
+}
+.sent {
+    text-align: right;
+    background: #007bff;
+    color: white;
+    align-self: flex-end;
+}
+
+.received {
+    text-align: left;
+    background: #ffffff;
+    align-self: flex-start;
+    border: 1px solid
+}
+
+.chat-container input[type="text"] {
+    width: calc(100% - 100px);
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+}
+
+.chat-container button {
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    border-radius: 40%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Right Sidebar (Users List) */
+.sidebar.right {
+    width: 20%;
+    background: white;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.right h3 {
+    font-size: 18px;
+    text-align: center;
+}
+
+#user-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+#user-list li {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#user-list li:hover {
+    background: #f8f9fa;
+}
+
+#user-list img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar.left, .sidebar.right {
+        width: 100%;
+        height: auto;
+    }
+    
+    .container {
+        flex-direction: column;
+    }
+
+    .chat-container {
+        height: 60vh;
+    }
+}
+/* User Search Bar */
+#searchUser {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    font-family: 'K2D', Arial, Roboto, Sans-serif;
+}
+
+#searchUser:focus {
+    border-color: #007bff;  
+}
+/* Style timestamps */
+.timestamp {
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+    margin-left: 10px;
+    display: block;
+    text-align: right;
+}
+/* Centered Toggle Button Container */
+.toggle-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  /* Center align the buttons */
+    margin: 10px auto;  /* Center it horizontally */
+    position: relative;
+    width: 60%; /* Adjust width as needed */
+    max-width: 300px; /* Restrict maximum width */
+    border-radius: 25px;
+    background: #f0f2f5;
+    padding: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow for a modern look */
+}
+
+/* Moving Background (Slider Animation) */
+.toggle-buttons::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: #007bff;
+    border-radius: 25px;
+    transition: transform 0.3s ease-in-out;
+    left: 0;
+    z-index: 0;
+}
+
+/* Shift background when 'Student' is selected */
+.toggle-buttons.student::before {
+    transform: translateX(100%);
+}
+
+/* Individual Buttons */
+.toggle-buttons button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background: transparent;
+    color: black;
+    position: relative;
+    z-index: 1;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Active Button Styling */
+.toggle-buttons button.active {
+    color: white;
+}
+
+/* Chat Top Bar */
+.chat-top-bar {
+    display: flex;
+    align-items: center;
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Profile Picture in Chat Top Bar */
+.chat-top-bar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid white;
+}
+.back-icon {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #f4f5f7; /* Blue color */
+    transition: color 0.2s ease-in-out;
+    display: none; /* Hide by default */
+}
+
+.back-icon:hover {
+    color: #717476; /* Darker blue on hover */
+}
+.chat-media {
+    max-width: 200px;
+    border-radius: 10px;
+    display: block;
+    margin-top: 5px;
+}
+
+.sent .chat-media {
+    border: 2px solid #007bff; /* Blue border for sender */
+}
+
+.received .chat-media {
+    border: 2px solid #28a745; /* Green border for receiver */
+}
+.scroll-down-btn {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: none; /* ✅ Hidden by default */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+.scroll-down-btn:hover {
+    background: #0056b3;
+}
+
+
+.file-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    border: groove black;
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+}
+.video-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: black;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  video {
+    width: 200px;
+    height: 150px;
+    margin: 5px;
+  }
+  
+  #end-call-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+
+
+

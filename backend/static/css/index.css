@@ -1,0 +1,208 @@
+    /* Basic Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 3%;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        background-color: transparent; /* Makes the header fully transparent */
+        backdrop-filter: none; /* Removes any blur effects */
+    }
+
+    .logo {
+        width: 60px;
+        border-radius: 10px;
+    }
+
+    .button1 {
+        padding: 10px 20px;
+        background-color: #FFD83B;
+        color: 007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'K2D', Arial, Roboto, Sans-serif;
+        text-decoration: none;
+    }
+
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 110vh;
+        background: url('https://image.shutterstock.com/image-photo/blurred-background-collage-university-student-600nw-726076549.jpg?app=peacock') center no-repeat;
+        background-size: cover;
+        
+    }
+
+    .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 35%;
+        transform: translate(-50%, -50%);
+        color: white;
+    }
+
+    .hero h1 {
+        margin-bottom: 10px;
+        font-size: 3rem;
+        color: #050a10;
+        font-family: 'K2D', Arial, Roboto, Sans-serif;
+    }
+
+    .hero p {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+        color: #050a10;
+        font-family: 'K2D', Arial, Roboto, Sans-serif;
+    }
+
+    .button2 {
+        padding: 10px 20px;
+        background-color: #FFD83B;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-family: 'K2D', Arial, Roboto, Sans-serif;
+        text-decoration: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+        }
+    }
+
+    .opportunities {
+        background: #f4f4f4;
+        text-align: center;
+        padding: 100px 50px;
+        font-family: 'K2D', Arial, Roboto, Sans-serif;
+    }
+
+    .skills-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .skill {
+        width: 30%;
+        padding: 50px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        background: white;
+        border-radius: 5px;
+        font-size: 1.5rem;
+    }
+    .skill i {
+        font-size: 50px;  /* Adjust size as needed */
+        color: #007bff;  /* Adjust color to fit your site's color scheme */
+        margin-bottom: 50px;  /* Adds space below the icon */
+    }
+    .skill h3 {
+        color: #333;
+    }
+
+    .skill p {
+        font-size: 0.9em;
+        color: #666;
+    }
+    footer {
+        background: #ffffff; /* Set the background color */
+        padding: 150px 150px; /* Adjusted padding for better spacing */
+        display: flex;
+        flex-direction: column; /* Stack footer items vertically */
+        align-items: center; /* Center-align footer content horizontally */
+        font-family: 'K2D', Arial, Roboto, Sans-serif;
+    }
+    
+    .footer-content {
+        display: flex;
+        justify-content: space-between; /* Distribute space between logo and footer columns */
+        width: 100%; /* Ensure footer content spans the full width */
+        max-width: 1200px; /* Set a max width to prevent stretching */
+        align-items: flex-start; /* Align items to the top */
+        gap: 50px; /* Space between the footer columns */
+    }
+    
+    .footer-logo {
+        display: flex;
+        align-items: center; /* Align the logo vertically */
+        justify-content: flex-start; /* Align logo to the left */
+        flex: 1; /* Ensures the logo has space on the left */
+    }
+    
+    .logo1 {
+        width: 100px; /* Adjust the logo size */
+        border-radius: 10px; /* Rounded corners for the logo */
+    }
+    
+    .footer-columns {
+        display: flex;
+        gap: 30px; /* Space between each column */
+        flex: 3; /* Ensures columns take more space */
+        justify-content: flex-end; /* Align columns to the right */
+    }
+    
+    .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align content to the left within each column */
+        min-width: 150px;
+    }
+    
+    .footer-column h2 {
+        color: #333;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .footer-menu, .social-links {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-menu li, .social-links li {
+        margin-bottom: 5px;
+    }
+    
+    .footer-menu li a, .social-links li a {
+        color: #1e96fc; /* Link color */
+        text-decoration: none; /* No underline for a clean look */
+        font-size: 14px; /* Uniform font size */
+    }
+    
+    .footer-column p {
+        color: #666;
+        font-size: 14px;
+    }
+    
+    .rights {
+        width: 100%; /* Ensure the rights text takes full width */
+        text-align: center; /* Center the copyright text */
+        margin-top: 100px; /* Space above the copyright */
+        font-size: 14px; /* Smaller font size for copyright */
+        color: #666;
+    }
+    
+    
+
