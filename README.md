@@ -7,7 +7,7 @@ The Student Skill Swap platform was developed using an agile and iterative metho
 The platform integrates modern web technologies with real-time communication features, enabling smooth interaction, session scheduling, and file exchange. A clean user interface coupled with a robust backend ensures a seamless experience for collaborative learning in educational environments.
 **Folder Structure**
 
-![folder structure](images/home.png)
+![folder structure](https://github.com/sinchana1408/Student_Skill_swap/blob/0c83eaa83a9cb48b9e799f5d132f0d0976716816/Screenshot%202025-07-11%20105105.png)
 
 **💻 Technologies Used**
 **Frontend**
