@@ -55,5 +55,6 @@ The platform integrates modern web technologies with real-time communication fea
 **User interaction page**
 ![Userinteraction Profile](images/profile.png)
 
+**📃 License MIT License **— Free to use, modify, and distribute with proper attribution.
 
 📘 Built for empowering academic communities with real-time peer learning.
