@@ -69,7 +69,7 @@ The platform integrates modern web technologies with real-time communication fea
 
 **👤👤 User interaction page**
 
-![Userinteraction Profile](images/profile.png)
+![Userinteraction Profile](https://github.com/sinchana1408/Student_Skill_swap/blob/71ba908da65981383b4a1b52e7287f3bf02e23e3/Screenshot%202025-07-11%20111448.png)
 
 **📃 License MIT License** — Free to use, modify, and distribute with proper attribution.
 
