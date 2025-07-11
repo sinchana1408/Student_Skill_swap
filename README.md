@@ -64,6 +64,7 @@ The platform integrates modern web technologies with real-time communication fea
 ![User Profile](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110537.png)
 
 **📘 material upload page** 
+
 ![My Screenshot](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110605.png)
 
 **👤👤 User interaction page**
