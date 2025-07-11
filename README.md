@@ -1,5 +1,6 @@
 **Student Skill Swap Platform **
 An innovative real-time knowledge exchange platform for students and faculty.
+
 **📘 Project Overview**
 The Student Skill Swap platform was developed using an agile and iterative methodology, focusing on creating a user-friendly knowledge exchange system between students and faculty. The project lifecycle was structured into planning, design, implementation, testing, and deployment. Weekly meetings and continuous feedback integration ensured alignment with user needs and timely progress.
 
@@ -55,6 +56,6 @@ The platform integrates modern web technologies with real-time communication fea
 **User interaction page**
 ![Userinteraction Profile](images/profile.png)
 
-**📃 License MIT License **— Free to use, modify, and distribute with proper attribution.
+📃 License MIT License — Free to use, modify, and distribute with proper attribution.
 
 📘 Built for empowering academic communities with real-time peer learning.
