@@ -11,50 +11,63 @@ The platform integrates modern web technologies with real-time communication fea
 ![folder structure](https://github.com/sinchana1408/Student_Skill_swap/blob/0c83eaa83a9cb48b9e799f5d132f0d0976716816/Screenshot%202025-07-11%20105105.png)
 
 **Technologies Used**
+
 **Frontend**
 - HTML5: Web page structure
 - CSS3: Styling and layout
 - JavaScript (Vanilla): Client-side interactivity
+  
 **Backend**
 - Python 3.x: Programming language
 - Flask: Lightweight web server and routing
 - Flask-SocketIO: WebSocket-based real-time communication
+
 **Database**
 - MongoDB: NoSQL document-based database
   - Stores user profiles, chat messages, and uploaded materials
+ 
 **Development Tools**
 - Visual Studio Code: Code editor
 - Git & GitHub: Version control and collaboration
 - Postman: API testing tool
 - MongoDB Compass: GUI for visualizing MongoDB collections
+
 **Other Libraries**
 - Bcrypt: Secure password hashing
 - Jinja2: HTML templating engine for Flask
+
 **🚀 Key Highlights**
 - Real-time 1-on-1 communication using Socket.IO
 - Skill-based user matching
 - Interactive user profiles and session scheduling
 - Secure login and data handling with hashed passwords
 - Designed for simplicity, accessibility, and educational collaboration
+  
 
 **📸 Screenshots**
 
 **🏠 Home Page**
+
 ![Home Page](https://github.com/sinchana1408/Student_Skill_swap/blob/e4eb41584e3360912bec00933faa56373ee80308/Screenshot%202025-07-11%20110310.png)
 
+
 **🔐 Login page**
-![Login Page](images/login.png)
+
+![Login Page](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110513.png)
 
 **🔐 Register Page**
-![Register Page](images/login.png)
+
+![Register Page](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110524.png)
 
 **👤 User Profile Page**
-![User Profile](images/profile.png)
+
+![User Profile](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110537.png)
 
 **📘 material upload page** 
-![My Screenshot](images/screenshot.png)
+![My Screenshot](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110605.png)
 
 **👤👤 User interaction page**
+
 ![Userinteraction Profile](images/profile.png)
 
 **📃 License MIT License** — Free to use, modify, and distribute with proper attribution.
