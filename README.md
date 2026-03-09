@@ -36,7 +36,7 @@ The platform integrates modern web technologies with real-time communication fea
 - Bcrypt: Secure password hashing
 - Jinja2: HTML templating engine for Flask
 
-**🚀 Key Highlights**
+**Key Highlights**
 - Real-time 1-on-1 communication using Socket.IO
 - Skill-based user matching
 - Interactive user profiles and session scheduling
@@ -44,33 +44,33 @@ The platform integrates modern web technologies with real-time communication fea
 - Designed for simplicity, accessibility, and educational collaboration
   
 
-**📸 Screenshots**
+**Screenshots**
 
-**🏠 Home Page**
+**Home Page**
 
 ![Home Page](https://github.com/sinchana1408/Student_Skill_swap/blob/e4eb41584e3360912bec00933faa56373ee80308/Screenshot%202025-07-11%20110310.png)
 
 
-**🔐 Login page**
+**Login page**
 
 ![Login Page](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110513.png)
 
-**🔐 Register Page**
+**Register Page**
 
 ![Register Page](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110524.png)
 
-**👤 User Profile Page**
+**User Profile Page**
 
 ![User Profile](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110537.png)
 
-**📘 material upload page** 
+**material upload page** 
 
 ![My Screenshot](https://github.com/sinchana1408/Student_Skill_swap/blob/b1b1a924e74201829f104b426041241e91c2dc4a/Screenshot%202025-07-11%20110605.png)
 
-**👤👤 User interaction page**
+**User interaction page**
 
 ![Userinteraction Profile](https://github.com/sinchana1408/Student_Skill_swap/blob/71ba908da65981383b4a1b52e7287f3bf02e23e3/Screenshot%202025-07-11%20111448.png)
 
-**📃 License MIT License** — Free to use, modify, and distribute with proper attribution.
+**License MIT License** — Free to use, modify, and distribute with proper attribution.
 
 Built for empowering academic communities with real-time peer learning.
